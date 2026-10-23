@@ -1,3 +1,15 @@
+<h1 align="center">Duet Plus</h1>
+
+<p align="center">
+  A fork of <a href="https://github.com/igawa6/eden-duo">Eden Duo</a> by igawa6 with extra compatibility and stability fixes, built and tested on the AYN Thor.
+</p>
+
+Duet Plus installs as its own app (`com.tapionallanaire.duetplus`), beside Eden Duo. It adds fixes for FINAL FANTASY RESONANCE, Pokémon Legends: Z-A, Double Dragon Revive, Dragon Quest VII Reimagined and others; see the [releases](https://github.com/tapionallanaire/duet-plus/releases) for the full list. Please report Duet Plus problems here, not to Eden Duo.
+
+Everything below is Eden Duo's original README.
+
+---
+
 <p align="center">
   <img src="src/android/app/src/main/res/drawable/ic_yuzu.png" width="128" alt="Eden Duo">
 </p>
