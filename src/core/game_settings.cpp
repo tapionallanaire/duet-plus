@@ -132,6 +132,8 @@ void DefaultForTitle(Setting& setting, T value) {
 void LoadBootOverrides(std::uint64_t program_id) {
     switch (static_cast<TitleID>(program_id)) {
         case TitleID::FinalFantasyResonance:
+            // The bloom hack scales sampled RGBA values and corrupts this game's sprite colours.
+            DefaultForTitle(Settings::values.fix_bloom_effects, false);
             // Its CPU builds draw data from GPU results; with the GPU thread running behind
             // (Adreno), it reads them before they land and the HUD blinks, then garbage commands
             // crash the driver. Baked vertex formats from those commands are invalid too.
