@@ -138,11 +138,23 @@ bool TitleSettings(std::uint64_t program_id, bool force) {
         case TitleID::FinalFantasyResonance:
             // The bloom hack scales sampled RGBA values and corrupts this game's sprite colours.
             DefaultForTitle(Settings::values.fix_bloom_effects, false);
-            // Its CPU builds draw data from GPU results; with the GPU thread running behind
-            // (Adreno), it reads them before they land and the HUD blinks, then garbage commands
-            // crash the driver. Baked vertex formats from those commands are invalid too.
-            // Its fence values must also wait for the GPU, or the HUD still blinks.
+            // Async GPU produces HUD dropouts and guest panics on Adreno. Keep guest command
+            // submission synchronous until that path is verified through gameplay.
             DefaultForTitle(Settings::values.use_asynchronous_gpu_emulation, false);
+            DefaultForTitle(Settings::values.use_docked_mode, Settings::ConsoleMode::Docked);
+            DefaultForTitle(Settings::values.cpu_clock, Settings::CpuClock::Boost);
+            DefaultForTitle(Settings::values.vsync_mode, Settings::VSyncMode::Mailbox);
+            DefaultForTitle(Settings::values.gpu_accuracy, Settings::GpuAccuracy::High);
+            DefaultForTitle(Settings::values.dma_accuracy, Settings::DmaAccuracy::Safe);
+            DefaultForTitle(Settings::values.sync_memory_operations, true);
+            DefaultForTitle(Settings::values.use_disk_shader_cache, true);
+            DefaultForTitle(Settings::values.use_reactive_flushing, true);
+            DefaultForTitle(Settings::values.enable_buffer_history, true);
+#ifdef __ANDROID__
+            DefaultForTitle(Settings::values.use_optimized_vertex_buffers, true);
+#endif
+            DefaultForTitle(Settings::values.use_asynchronous_shaders, true);
+            DefaultForTitle(Settings::values.dyna_state, Settings::ExtendedDynamicState::EDS3);
             DefaultForTitle(Settings::values.vertex_input_dynamic_state, true);
             // FXAA smears its character faces; native resolution keeps them sharp without it.
             DefaultForTitle(Settings::values.anti_aliasing, Settings::AntiAliasing::None);
