@@ -1652,7 +1652,13 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback {
         dualScreen.onResume()
         // Eden Duo: the companion toggle gesture only exists where a companion window can.
         if (org.yuzu.yuzu_emu.duo.DuoCapability.isAvailable(requireContext())) {
-            b.surfaceInputOverlay.touchscreenFilter = dualScreen.gameTouch::filter // Eden Duo
+            // Eden Duo: the companion gesture exists only where there is a companion to toggle.
+            b.surfaceInputOverlay.touchscreenFilter =
+                if (org.yuzu.yuzu_emu.duo.DuoCapability.isAvailable(requireContext())) {
+                    dualScreen.gameTouch::filter
+                } else {
+                    null
+                }
         }
     }
 
