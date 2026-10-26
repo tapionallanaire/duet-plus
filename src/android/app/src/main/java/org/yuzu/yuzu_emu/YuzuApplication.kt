@@ -66,7 +66,7 @@ class YuzuApplication : Application() {
         // Eden Duo: a device with one screen gets no Duo anything (see DuoCapability).
         val duoAvailable = org.yuzu.yuzu_emu.duo.DuoCapability.isAvailable(this)
         NativeLibrary.setDuoAvailable(duoAvailable)
-        Log.info("Duo: ${if (duoAvailable) "second screen available" else "single screen, Duo disabled"}")
+        android.util.Log.i("Duo", if (duoAvailable) "second screen available" else "single screen, Duo disabled")
 
         // Initialize Freedreno config BEFORE loading native library
         // This ensures GPU driver environment variables are set before adrenotools initializes
